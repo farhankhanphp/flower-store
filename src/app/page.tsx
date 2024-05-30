@@ -12,9 +12,5 @@ type HomePageProps = {
 };
 
 export default function Home() {
-  return (
-    <>
-      <OrderListing />
-    </>
-  );
+  return <>Homepage</>;
 }

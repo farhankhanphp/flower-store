@@ -58,6 +58,7 @@ const DropDown: React.FC<DropDownProps> = ({ buttonLabel, menuItems }) => {
               item.onClick();
               handleClose();
             }}
+            style={index === menuItems.length - 1 ? { color: "red" } : {}}
           >
             {item.label}
           </MenuItem>
