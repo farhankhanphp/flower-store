@@ -41,7 +41,7 @@ const OrderListing = () => {
       style={{
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "center",
+        justifyContent: "start",
         marginTop: "20px",
       }}
     >
