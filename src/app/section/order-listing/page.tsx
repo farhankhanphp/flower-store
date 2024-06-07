@@ -43,7 +43,7 @@ const OrderListing = () => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "start",
-        marginTop: "20px",
+        marginTop: "10px",
       }}
     >
       {orders.map((order, index) => (
