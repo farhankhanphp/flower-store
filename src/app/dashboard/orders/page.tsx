@@ -133,7 +133,32 @@ export default function MiniDrawer() {
     </DrawerHeader>
     <Divider />
     <List>
-     {["Orders"].map((text, index) => (
+     {["Dashboard", "Orders"].map((text, index) => (
+      <ListItem key={text} disablePadding sx={{ display: "block" }}>
+       <ListItemButton
+        sx={{
+         minHeight: 48,
+         justifyContent: open ? "initial" : "center",
+         px: 2.5,
+        }}
+       >
+        <ListItemIcon
+         sx={{
+          minWidth: 0,
+          mr: open ? 3 : "auto",
+          justifyContent: "center",
+         }}
+        >
+         {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+        </ListItemIcon>
+        <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+       </ListItemButton>
+      </ListItem>
+     ))}
+    </List>
+    <Divider />
+    <List>
+     {["user"].map((text, index) => (
       <ListItem key={text} disablePadding sx={{ display: "block" }}>
        <ListItemButton
         sx={{
