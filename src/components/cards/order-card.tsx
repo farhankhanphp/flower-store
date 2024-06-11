@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, Typography, Chip, Box } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import MoneyOffIcon from "@mui/icons-material/MoneyOff";
 import DropDown from "@/components/dropdown";
+import CustomDialog from "../dialog";
+import OrderForm from "@/components/forms/order-form";
 
 type OrderCardProps = {
  orderTitle: string;
@@ -12,12 +14,19 @@ type OrderCardProps = {
  remainingAmount: string;
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({
- orderTitle,
- employeeName,
- customerPrice,
- remainingAmount,
-}) => {
+const OrderCard: React.FC<OrderCardProps> = props => {
+ const { orderTitle, employeeName, customerPrice, remainingAmount } = props;
+
+ const [dialogOpen, setDialogOpen] = useState(false);
+
+ const handleOpenDialog = () => {
+  setDialogOpen(true);
+ };
+
+ const handleCloseDialog = () => {
+  setDialogOpen(false);
+ };
+
  const menuItems = [
   {
    label: "Insert order before",
@@ -37,41 +46,51 @@ const OrderCard: React.FC<OrderCardProps> = ({
  ];
 
  return (
-  <Card sx={{ position: "relative", maxWidth: 345, minWidth: 320, p: 2, m: 1 }}>
-   <div className="order-card-dropdown">
-    <DropDown buttonLabel=":" menuItems={menuItems} />
-   </div>
-   <CardContent sx={{ p: 0 }}>
-    <Typography gutterBottom variant="h6" component="div">
-     {orderTitle}
-    </Typography>
-    <Box display="flex" alignItems="center" mb={1}>
-     <PersonIcon fontSize="small" color="action" />
-     <Typography variant="body2" color="text.secondary" ml={1}>
-      EMPLOYEE NAME
+  <>
+   <Card sx={{ position: "relative", maxWidth: 345, minWidth: 320, p: 2, m: 1 }}>
+    <div className="order-card-dropdown">
+     <DropDown buttonLabel=":" menuItems={menuItems} />
+    </div>
+    <CardContent sx={{ p: 0, cursor: "pointer" }} onClick={handleOpenDialog}>
+     <Typography gutterBottom variant="h6" component="div">
+      {orderTitle}
      </Typography>
-    </Box>
-    <Chip size="small" label={employeeName} color="primary" sx={{ mb: 2 }} />
-    <Box display="flex" alignItems="center" mb={1}>
-     <AttachMoneyIcon fontSize="small" color="action" />
-     <Typography variant="body2" color="text.secondary" ml={1}>
-      CUSTOMER PRICE
+     <Box display="flex" alignItems="center" mb={1}>
+      <PersonIcon fontSize="small" color="action" />
+      <Typography variant="body2" color="text.secondary" ml={1}>
+       EMPLOYEE NAME
+      </Typography>
+     </Box>
+     <Chip size="small" label={employeeName} color="primary" sx={{ mb: 2 }} />
+     <Box display="flex" alignItems="center" mb={1}>
+      <AttachMoneyIcon fontSize="small" color="action" />
+      <Typography variant="body2" color="text.secondary" ml={1}>
+       CUSTOMER PRICE
+      </Typography>
+     </Box>
+     <Typography variant="body1" color="text.primary" sx={{ mb: 2 }}>
+      {customerPrice}
      </Typography>
-    </Box>
-    <Typography variant="body1" color="text.primary" sx={{ mb: 2 }}>
-     {customerPrice}
-    </Typography>
-    <Box display="flex" alignItems="center" mb={1}>
-     <MoneyOffIcon fontSize="small" color="action" />
-     <Typography variant="body2" color="text.secondary" ml={1}>
-      REMAINING $
+     <Box display="flex" alignItems="center" mb={1}>
+      <MoneyOffIcon fontSize="small" color="action" />
+      <Typography variant="body2" color="text.secondary" ml={1}>
+       REMAINING $
+      </Typography>
+     </Box>
+     <Typography variant="body1" color="text.primary">
+      {remainingAmount}
      </Typography>
-    </Box>
-    <Typography variant="body1" color="text.primary">
-     {remainingAmount}
-    </Typography>
-   </CardContent>
-  </Card>
+    </CardContent>
+   </Card>
+   <CustomDialog
+    title="Create Order"
+    content={<OrderForm {...props} mode="edit" />}
+    open={dialogOpen}
+    handleClose={handleCloseDialog}
+    fullWidth={true}
+    fullScreen={false}
+   />
+  </>
  );
 };
 

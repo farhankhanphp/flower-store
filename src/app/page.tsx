@@ -1,18 +1,12 @@
-type Order = {
- orderTitle: string;
- employeeName: string;
- customerPrice: string;
- remainingAmount: string;
-};
-
-type HomePageProps = {
- orders: Order[];
-};
+'use client';
+import { Button } from '@mui/material';
 
 export default function Home() {
  return (
   <>
-   <div>Homepage</div>
+   <Button variant="outlined">
+    Open Custom Form Dialog
+   </Button>
   </>
  );
 }
