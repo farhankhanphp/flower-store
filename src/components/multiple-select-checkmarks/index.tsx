@@ -1,12 +1,12 @@
-// MultipleSelectCheckmarks.tsx
-import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
+import * as React from "react";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
+import { useFormikContext } from "formik";
 
 interface Record {
   name: string;
@@ -14,6 +14,8 @@ interface Record {
 }
 
 interface Props {
+  name: string;
+  label: string;
   records: Record[];
 }
 
@@ -28,31 +30,36 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelectCheckmarks({ records }: Props) {
-  const [selectedRecords, setSelectedRecords] = React.useState<Record[]>([]);
+const MultipleSelectCheckmarks: React.FC<Props> = ({ name, label, records }) => {
+  const { values, setFieldValue } = useFormikContext<{ [key: string]: Record[] }>();
+  const selectedRecords = values[name] || [];
 
-  const handleChange = (event: SelectChangeEvent<typeof selectedRecords>) => {
-    const {
-      target: { value },
-    } = event;
-    setSelectedRecords(value as Record[]);
+  if (values[name] === undefined) return;
+
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const { value } = event.target;
+    setFieldValue(name, value as Record[]);
   };
 
   return (
     <div>
       <FormControl fullWidth>
-        <InputLabel id="demo-multiple-checkbox-label">Select Records</InputLabel>
+        <InputLabel id={`${name}-label`}>{label}</InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
+          labelId={`${name}-label`}
+          id={name}
           multiple
           value={selectedRecords}
+          //@ts-ignore
           onChange={handleChange}
-          input={<OutlinedInput label="Select Records" />}
-          renderValue={(selected) => (selected as Record[]).map((record) => `${record.name} (${record.price})`).join(', ')}
+          input={<OutlinedInput label={label} />}
+          renderValue={selected =>
+            (selected as Record[]).map(record => `${record.name} (${record.price})`).join(", ")
+          }
           MenuProps={MenuProps}
         >
-          {records.map((record) => (
+          {records.map(record => (
+            //@ts-ignore
             <MenuItem key={record.name} value={record}>
               <Checkbox checked={selectedRecords.some(item => item.name === record.name)} />
               <ListItemText primary={`${record.name} (${record.price})`} />
@@ -62,4 +69,6 @@ export default function MultipleSelectCheckmarks({ records }: Props) {
       </FormControl>
     </div>
   );
-}
+};
+
+export default MultipleSelectCheckmarks;
