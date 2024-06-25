@@ -94,7 +94,7 @@ const OrderForm = (
     <FormikProvider value={formik}>
       <Form onSubmit={formik.handleSubmit}>
         <Grid container gap={2} flexWrap="nowrap">
-          <Grid container item sm={5} gap={4}>
+          <Grid container item sm={5} gap={4} overflow={"auto"}>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
                 <Typography variant="h6">Order Title</Typography>
@@ -329,7 +329,7 @@ const OrderForm = (
             <Divider orientation="vertical" />
           </Grid>
 
-          <Grid item container flexDirection="column" sm={7} gap={4}>
+          <Grid item container flexDirection="column" sm={7} gap={4} overflow={"hidden"}>
             {formik.values.orderTitle && (
               <Grid item sx={{ height: "56px" }}>
                 <Typography variant="h6">Order Title</Typography>
