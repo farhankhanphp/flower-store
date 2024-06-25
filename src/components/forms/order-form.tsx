@@ -78,7 +78,6 @@ const OrderForm = (
       // Handle form submission
     },
     validateOnBlur: false,
-    validateOnChange: false,
   });
 
   useImperativeHandle(
@@ -92,12 +91,14 @@ const OrderForm = (
 
   return (
     <FormikProvider value={formik}>
-      <Form onSubmit={formik.handleSubmit}>
-        <Grid container gap={2} flexWrap="nowrap">
-          <Grid container item sm={5} gap={4} overflow={"auto"}>
-            <Grid item xs={12} container alignItems="center">
+      <Form onSubmit={formik.handleSubmit} className="h-full">
+        <Grid container gap={2} sx={{ flexWrap: { xs: "wrap", md: "nowrap" } }} className="h-full">
+          <Grid container item columns={{ xs: 12, sm: 6 }} gap={3} className="h-full overflow-y-auto pr-5">
+            <Grid item xs={12} container alignItems="center" className="mt-2">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Order Title</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Order Title
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -114,7 +115,9 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Employee Name</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Employee Name
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <SingleSelect name="employeeName" label="Select the Name" options={NAMES} />
@@ -122,7 +125,9 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Customer Price</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Customer Price
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -139,7 +144,9 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Remaining</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Remaining
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -156,12 +163,14 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12}>
               <Divider>
-                <Chip label="Records Details" size="small" />
+                <Chip color="primary" label="Records Details" size="small" />
               </Divider>
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Hard Goods</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Hard Goods
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <MultipleSelectCheckmarks name="selectedRecords" label="Select Records" records={RECORDS} />
@@ -169,7 +178,9 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Hard Goods Price</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Hard Goods Price
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -179,31 +190,16 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Hard Goods Price"
-                  defaultValue="20.45"
+                  value={`$${formik.values.selectedRecords?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
                   fullWidth
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Greens</Typography>
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                <BasicTextFields
-                  InputProps={{
-                    readOnly: true,
-                    notched: true,
-                  }}
-                  InputLabelProps={{ shrink: true }}
-                  label="Greens Price"
-                  defaultValue="20.45"
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={12} container alignItems="center">
-              <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Packaging</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Packaging
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <MultipleSelectCheckmarks name="packaging" label="Select Packaging" records={PACKING} />
@@ -211,7 +207,9 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Packing Price</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Packing Price
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -221,14 +219,16 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Packing Price"
-                  defaultValue="15.0"
+                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
                   fullWidth
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Fresh Flower qty</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Fresh Flower qty
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <MultipleSelectCheckmarks
@@ -240,7 +240,9 @@ const OrderForm = (
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Remaining</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Remaining
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -250,14 +252,16 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Remaining"
-                  defaultValue="5.00"
+                  value="5.00"
                   fullWidth
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Quantity</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Quantity
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -267,14 +271,16 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="From Fresh Flowers Quantity"
-                  defaultValue="5.00"
+                  value={`$${formik.values.freshFlowerQuantity?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
                   fullWidth
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Price</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Price
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -284,14 +290,16 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="(from Fresh Flowers) (from Fresh Flowers Quantity)"
-                  defaultValue="5.00"
+                  value="5.00"
                   fullWidth
                 />
               </Grid>
             </Grid>
             <Grid item xs={12} container alignItems="center">
               <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Flower Price</Typography>
+                <Typography variant="h6" sx={{ display: { xs: "none", sm: "initial" } }}>
+                  Flower Price
+                </Typography>
               </Grid>
               <Grid item xs={12} sm={9}>
                 <BasicTextFields
@@ -301,117 +309,287 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Flower Price"
-                  defaultValue="5.00"
+                  value="5.00"
                   fullWidth
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} container alignItems="center">
-              <Grid item xs={12} sm={3}>
-                <Typography variant="h6">Wastage</Typography>
-              </Grid>
-              <Grid item xs={12} sm={9}>
+          </Grid>
+
+          {/* Sidebar */}
+          <Grid item>
+            <Divider orientation="vertical" />
+          </Grid>
+
+          <Grid
+            item
+            container
+            flexDirection="column"
+            flexWrap="nowrap"
+            columns={{ xs: 12, sm: 6 }}
+            gap={3}
+            className="h-full overflow-y-auto pr-5"
+          >
+            <Grid item>
+              <Divider>
+                <Chip color="primary" label="Order Preview " size="small" />
+              </Divider>
+            </Grid>
+            {
+              <Grid item>
                 <BasicTextFields
                   InputProps={{
                     readOnly: true,
                     notched: true,
                   }}
                   InputLabelProps={{ shrink: true }}
-                  label="Wastage Amount"
-                  defaultValue="8.00"
+                  label="Order Title"
+                  value={formik.values.orderTitle || "---"}
+                  className="mt-2"
                   fullWidth
+                  size="small"
                 />
               </Grid>
-            </Grid>
-          </Grid>
-          {/* Sidebar */}
-          <Grid item>
-            <Divider orientation="vertical" />
-          </Grid>
-
-          <Grid item container flexDirection="column" sm={7} gap={4} overflow={"hidden"}>
-            {formik.values.orderTitle && (
-              <Grid item sx={{ height: "56px" }}>
-                <Typography variant="h6">Order Title</Typography>
-                <Chip label={formik.values.orderTitle} size="small" />
+            }
+            {
+              <Grid item>
+                <BasicTextFields
+                  InputProps={{
+                    readOnly: true,
+                    notched: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                  label="Employee Name"
+                  value={formik.values.employeeName || "---"}
+                  fullWidth
+                  size="small"
+                />
               </Grid>
-            )}
-            {formik.values.employeeName && (
-              <Grid item sx={{ height: "56px" }}>
-                <Typography variant="h6">Employee Name</Typography>
-                <Chip label={formik.values.employeeName} size="small" />
-              </Grid>
-            )}
-            {formik.values.customerPrice && (
-              <Grid item sx={{ height: "56px" }}>
-                <Typography variant="h6">Customer Price</Typography>
-                <Chip label={formik.values.customerPrice} size="small" />
-              </Grid>
-            )}
+            }
 
-            {formik.values.remainingAmount && (
-              <Grid item sx={{ height: "56px" }}>
-                <Typography variant="h6">Remaining Ammount</Typography>
-                <Chip label={formik.values.remainingAmount} size="small" />
+            {
+              <Grid item container flexWrap="nowrap" gap={1}>
+                <Grid item>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Customer Price"
+                    value={formik.values.customerPrice || 0}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+                <Grid item>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Greens"
+                    value={`${(20 * +formik.values.customerPrice) / 100}`}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+                <Grid item>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Wastage"
+                    value={`${(10 * +formik.values.customerPrice) / 100}`}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
               </Grid>
-            )}
+            }
 
-            <Grid item>
-              <Divider>
-                <Chip label="Records Details" size="small" />
-              </Divider>
-            </Grid>
+            {
+              <Grid item>
+                <BasicTextFields
+                  InputProps={{
+                    readOnly: true,
+                    notched: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                  label="Remaining Budget"
+                  value={formik.values.remainingAmount || 0}
+                  fullWidth
+                  size="small"
+                />
+              </Grid>
+            }
 
-            {formik.values?.selectedRecords?.length !== 0 && (
+            {
               <Grid item display={"flex"}>
                 <Typography variant="h6" whiteSpace={"nowrap"} sx={{ mr: 1 }}>
                   Hard Goods:{" "}
                 </Typography>
                 <Grid container gap={0.5}>
-                  {formik.values?.selectedRecords?.map((record, index) => (
-                    <React.Fragment key={index}>
-                      <Grid item>
+                  {formik.values?.selectedRecords?.length !== 0 ? (
+                    formik.values?.selectedRecords?.map(record => (
+                      <Grid item key={record.name}>
                         <Chip label={`${record.name} - ${record.price}`} size="small" />
                       </Grid>
-                    </React.Fragment>
-                  ))}
+                    ))
+                  ) : (
+                    <Chip label="---" size="small" />
+                  )}
                 </Grid>
               </Grid>
-            )}
+            }
 
-            {formik.values?.packaging && formik.values.packaging.length !== 0 && (
+            {
+              <Grid item>
+                <BasicTextFields
+                  InputProps={{
+                    readOnly: true,
+                    notched: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                  label="Total Hard Goods Price"
+                  value={`$${formik.values.selectedRecords?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  fullWidth
+                  size="small"
+                />
+              </Grid>
+            }
+
+            {
               <Grid item display={"flex"}>
                 <Typography variant="h6" sx={{ mr: 1 }}>
                   Packaging:
                 </Typography>
                 <Grid container gap={0.5}>
-                  {formik.values?.packaging.map((record, index) => (
-                    <React.Fragment key={index}>
-                      <Grid item>
+                  {formik?.values?.packaging?.length !== 0 ? (
+                    formik?.values?.packaging?.map(record => (
+                      <Grid item key={record.name}>
                         <Chip label={`${record.name} - ${record.price}`} size="small" />
                       </Grid>
-                    </React.Fragment>
-                  ))}
+                    ))
+                  ) : (
+                    <Chip label="---" size="small" />
+                  )}
                 </Grid>
               </Grid>
-            )}
+            }
 
-            {formik.values?.freshFlowerQuantity?.length !== 0 && (
+            {
+              <Grid item>
+                <BasicTextFields
+                  InputProps={{
+                    readOnly: true,
+                    notched: true,
+                  }}
+                  InputLabelProps={{ shrink: true }}
+                  label="Total Packaging Price"
+                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  fullWidth
+                  size="small"
+                />
+              </Grid>
+            }
+
+            {
               <Grid item display={"flex"}>
                 <Typography variant="h6" whiteSpace={"nowrap"} sx={{ mr: 1 }}>
-                  Fresh Flower Quantity
+                  Fresh Flower Quantity:
                 </Typography>
                 <Grid container gap={0.5}>
-                  {formik.values?.freshFlowerQuantity?.map((record, index) => (
-                    <React.Fragment key={index}>
-                      <Grid item>
+                  {formik.values?.freshFlowerQuantity?.length !== 0 ? (
+                    formik.values?.freshFlowerQuantity?.map(record => (
+                      <Grid item key={record.name}>
                         <Chip label={`${record.name} - ${record.price}`} size="small" />
                       </Grid>
-                    </React.Fragment>
-                  ))}
+                    ))
+                  ) : (
+                    <Chip label="---" size="small" />
+                  )}
                 </Grid>
               </Grid>
-            )}
+            }
+
+            {
+              <Grid item container flexWrap="nowrap" gap={1}>
+                <Grid item>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Total Fresh Flower Price"
+                    value={`$${formik.values.freshFlowerQuantity?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+                <Grid item>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Remaining"
+                    value={"$5.00"}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Quantity"
+                    value={"$5.00"}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+              </Grid>
+            }
+
+            {
+              <Grid container flexWrap="nowrap" gap={1}>
+                <Grid xs={12} md={6}>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Price"
+                    value={"$5.00"}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+                <Grid xs={12} md={6}>
+                  <BasicTextFields
+                    InputProps={{
+                      readOnly: true,
+                      notched: true,
+                    }}
+                    InputLabelProps={{ shrink: true }}
+                    label="Flower Price"
+                    value={"$5.00"}
+                    fullWidth
+                    size="small"
+                  />
+                </Grid>
+              </Grid>
+            }
           </Grid>
         </Grid>
 

@@ -39,6 +39,23 @@ const CustomDialog = (
       maxWidth={maxWidth}
       fullWidth={fullWidth}
       fullScreen={fullScreen}
+      sx={{
+        height: "100%",
+        "& .MuiDialog-container": {
+          height: "100vh",
+        },
+        "& .MuiDialog-paper": {
+          height: "100%",
+        },
+        "& .MuiDialog-paper h2": {},
+        "& .MuiDialogContent-dividers": {
+          height: "90% !important",
+          flex: "unset",
+        },
+        "& .MuiDialogActions-root": {
+          flex: "unset",
+        },
+      }}
     >
       <DialogTitle id="dialog-title">{title}</DialogTitle>
       <DialogContent dividers>{content}</DialogContent>
