@@ -190,7 +190,7 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Hard Goods Price"
-                  value={`$${formik.values.selectedRecords?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  value={`$${formik.values.selectedRecords?.reduce((acc, obj) => +obj.price.toString().replace("$", "") + acc, 0)}`}
                   fullWidth
                 />
               </Grid>
@@ -219,7 +219,7 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Packing Price"
-                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.toString().replace("$", "") + acc, 0)}`}
                   fullWidth
                 />
               </Grid>
@@ -271,7 +271,7 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="From Fresh Flowers Quantity"
-                  value={`$${formik.values.freshFlowerQuantity?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  value={`$${formik.values.freshFlowerQuantity?.reduce((acc, obj) => +obj.price.toString().replace("$", "") + acc, 0)}`}
                   fullWidth
                 />
               </Grid>
@@ -455,7 +455,7 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Total Hard Goods Price"
-                  value={`$${formik.values.selectedRecords?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.toString().replace("$", "") + acc, 0)}`}
                   fullWidth
                   size="small"
                 />
@@ -490,7 +490,7 @@ const OrderForm = (
                   }}
                   InputLabelProps={{ shrink: true }}
                   label="Total Packaging Price"
-                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                  value={`$${formik.values.packaging?.reduce((acc, obj) => +obj.price.toString().replace("$", "") + acc, 0)}`}
                   fullWidth
                   size="small"
                 />
@@ -526,7 +526,7 @@ const OrderForm = (
                     }}
                     InputLabelProps={{ shrink: true }}
                     label="Total Fresh Flower Price"
-                    value={`$${formik.values.freshFlowerQuantity?.reduce((acc, obj) => +obj.price.replace("$", "") + acc, 0)}`}
+                    value={`$${formik.values.freshFlowerQuantity?.reduce((acc, obj) => +obj.price.toString().replace("$", "") + acc, 0)}`}
                     fullWidth
                     size="small"
                   />

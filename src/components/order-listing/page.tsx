@@ -6,8 +6,8 @@ import OrderCard from "@/components/cards/order-card";
 type Order = {
   orderTitle: string;
   employeeName: string;
-  customerPrice: string;
-  remainingAmount: string;
+  customerPrice: number;
+  remainingAmount: number;
 };
 
 const OrderListing = () => {

@@ -10,8 +10,8 @@ import OrderForm from "@/components/forms/order-form";
 type OrderCardProps = {
   orderTitle: string;
   employeeName: string;
-  customerPrice: string;
-  remainingAmount: string;
+  customerPrice: number;
+  remainingAmount: number;
 };
 
 const OrderCard: React.FC<OrderCardProps> = props => {
