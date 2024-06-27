@@ -12,27 +12,27 @@ import { Form, FormikProvider, useFormik } from "formik";
 
 type RecordType = {
   name: string;
-  price: string;
+  price: number;
 };
 
 type OrderCardProps = {
   orderTitle?: string;
   employeeName?: string;
-  customerPrice?: string;
-  remainingAmount?: string;
+  customerPrice?: number;
+  remainingAmount?: number;
   mode: "add" | "edit";
 };
 
 const OrderFormSchema = Yup.object().shape({
   orderTitle: Yup.string().required("Order Title is required"),
   employeeName: Yup.string().required("Employee Name is required"),
-  customerPrice: Yup.string().required("Customer Price is required"),
-  remainingAmount: Yup.string().required("Remaining Amount is required"),
+  customerPrice: Yup.number().required("Customer Price is required"),
+  remainingAmount: Yup.number().required("Remaining Amount is required"),
   selectedRecords: Yup.array()
     .of(
       Yup.object({
         name: Yup.string().required(),
-        price: Yup.string().required(),
+        price: Yup.number().required(),
       }),
     )
     .min(1, "Select at least one record"),
@@ -40,7 +40,7 @@ const OrderFormSchema = Yup.object().shape({
     .of(
       Yup.object({
         name: Yup.string().required(),
-        price: Yup.string().required(),
+        price: Yup.number().required(),
       }),
     )
     .min(1, "Select at least one record"),
@@ -48,7 +48,7 @@ const OrderFormSchema = Yup.object().shape({
     .of(
       Yup.object({
         name: Yup.string().required(),
-        price: Yup.string().required(),
+        price: Yup.number().required(),
       }),
     )
     .min(1, "Select at least one record"),
@@ -66,8 +66,8 @@ const OrderForm = (
     initialValues: {
       orderTitle: mode === "edit" ? orderTitle || "" : "",
       employeeName: mode === "edit" ? employeeName || "" : "",
-      customerPrice: mode === "edit" ? customerPrice || "" : "",
-      remainingAmount: mode === "edit" ? remainingAmount || "" : "",
+      customerPrice: mode === "edit" ? customerPrice || 0 : 0,
+      remainingAmount: mode === "edit" ? remainingAmount || 0 : 0,
       selectedRecords: [] as RecordType[],
       freshFlowerQuantity: [] as RecordType[],
       packaging: [] as RecordType[],
